@@ -1,109 +1,602 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Payroll System</title>
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/unicons.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-    <!-- MAIN STYLE -->
-    <link rel="stylesheet" href="css/tooplate-style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhargav Chirumamilla | Applied AI Engineer</title>
     
+    <!-- Space Grotesk Font for a bespoke, technical-yet-human aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <style>
+        /* Base Variables (Light Mode) */
+        :root {
+            --bg: #F4F4F0; 
+            --card-bg: #FFFFFF;
+            --text: #111111; 
+            --text-secondary: #555555;
+            --accent: #FF4500; /* Vibrant Orange */
+            --border: #111111;
+            --nav-bg: rgba(244, 244, 240, 0.85);
+        }
 
-  </head>
-  <body>
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --bg: #111111;
+            --card-bg: #1A1A1A;
+            --text: #F4F4F0;
+            --text-secondary: #AAAAAA;
+            --accent: #FF4500; 
+            --border: #F4F4F0;
+            --nav-bg: rgba(17, 17, 17, 0.85);
+        }
 
-    <!-- MENU -->
-    <nav class="navbar navbar-expand-sm navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">overview</a>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-            
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    
-                    <li class="nav-item">
-                        <a href="roles.html" class="nav-link">Roles</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="team.html" class="nav-link"><span data-hover="Members">Team members</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="tech.html" class="nav-link">Technologies used</a>
-                    </li>
-                </ul>
+        a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
 
-                <ul class="navbar-nav ml-lg-auto">
-                    <div class="ml-lg-4">
-                      <div class="color-mode d-lg-flex justify-content-center align-items-center">
-                        <i class="color-mode-icon"></i>
-                        Color mode
-                      </div>
-                    </div>
-                </ul>
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+        
+        .theme-toggle { cursor: pointer; font-size: 1.25rem; user-select: none; transition: transform 0.2s ease; }
+        .theme-toggle:hover { transform: scale(1.1); }
+        
+        .resume-btn {
+            background: var(--text);
+            color: var(--bg) !important;
+            padding: 0.4rem 1rem;
+            border: 2px solid var(--border);
+            font-weight: 700 !important;
+            transition: all 0.2s ease;
+        }
+        .resume-btn:hover {
+            background: var(--accent);
+            color: #fff !important;
+            border-color: var(--accent);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px var(--border);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4vw;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            max-width: 1200px;
+        }
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 750px;
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            line-height: 1.5;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 4vw;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Sections */
+        section { padding: 8rem 4vw; border-top: 2px solid var(--border); overflow: hidden; }
+        .section-header {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 4rem;
+            line-height: 1;
+        }
+
+        /* About & Education */
+        .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; }
+        .about-text p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7; }
+        
+        .education-box { background: var(--card-bg); border: 2px solid var(--border); padding: 2.5rem; box-shadow: 6px 6px 0px var(--border); height: fit-content; }
+        .edu-item { margin-bottom: 2rem; }
+        .edu-item:last-child { margin-bottom: 0; }
+        .edu-school { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .edu-degree { font-weight: 600; color: var(--accent); }
+        .edu-meta { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; }
+
+        /* Skills Grid */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+        .skill-card { background: var(--card-bg); border: 2px solid var(--border); padding: 2rem; box-shadow: 6px 6px 0px var(--border); transition: transform 0.2s ease; }
+        .skill-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--accent); }
+        .skill-card h3 { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .skill-tags span { background: var(--bg); border: 1px solid var(--border); padding: 0.35rem 0.85rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Experience */
+        .exp-item { display: grid; grid-template-columns: 1fr 2.5fr; gap: 2rem; padding: 3rem 0; border-bottom: 2px solid var(--border); }
+        .exp-item:first-of-type { border-top: 2px solid var(--border); }
+        .exp-meta h3 { font-size: 1.75rem; font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; }
+        .exp-meta .company { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+        .exp-meta .date { font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.5rem; font-weight: 500; }
+        .exp-details p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.25rem; position: relative; padding-left: 1.75rem; }
+        .exp-details p::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+
+        /* Projects */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .project-card { background: var(--card-bg); border: 2px solid var(--border); padding: 2.5rem; box-shadow: 6px 6px 0px var(--border); transition: all 0.2s ease; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--accent); }
+        .project-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.25rem; line-height: 1.2; }
+        .project-title a:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .project-tech span { border: 1px solid var(--border); padding: 0.25rem 0.75rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; background: var(--bg); color: var(--text); }
+        .project-desc { font-size: 1.05rem; color: var(--text-secondary); flex-grow: 1; }
+
+        /* Lists (Research & Blog) */
+        .list-container { max-width: 900px; }
+        .list-item { margin-bottom: 3rem; }
+        .list-title { font-size: 1.3rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; }
+        .list-title a { display: inline-block; position: relative; }
+        .list-title a::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px; bottom: 0; left: 0; background-color: var(--accent); transform-origin: bottom right; transition: transform 0.25s ease-out; }
+        .list-title a:hover { color: var(--accent); }
+        .list-title a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        .list-meta-1 { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 0.4rem; }
+        .list-meta-2 { font-size: 0.95rem; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Footer */
+        footer { padding: 4rem 4vw; border-top: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--text); color: var(--bg); }
+        footer .copyright { font-size: 1.1rem; font-weight: 500; }
+        footer .footer-links a { color: var(--bg); font-weight: 600; text-transform: uppercase; margin-left: 2rem; font-size: 0.95rem; }
+        footer .footer-links a:hover { color: var(--accent); }
+
+        /* Responsive */
+        @media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; gap: 3rem; } }
+        @media (max-width: 768px) {
+            .nav-links { display: none; } 
+            .exp-item { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+            .hero h1 { margin-top: 5rem; }
+        }
+        @media (max-width: 600px) {
+            .hero, section { padding: 5rem 1.5rem; }
+            .project-card, .education-box, .skill-card { padding: 1.5rem; }
+            footer { flex-direction: column; align-items: flex-start; gap: 2rem; }
+            footer .footer-links { display: flex; flex-direction: column; gap: 1rem; }
+            footer .footer-links a { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="#">Bhargav<span>_</span></a></div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#work">Work</a>
+                <a href="#projects">Projects</a>
+                <a href="#research">Research</a>
+                <a href="#blog">Blog</a>
             </div>
+            <div class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">◑</div>
+            <!-- Resume Link explicitly uses "download" attribute -->
+            <a href="bhargav_resume.pdf" download="Bhargav_Chirumamilla_Resume.pdf" class="resume-btn">Resume (PDF)</a>
         </div>
     </nav>
- 
- <h1 align="center">Automated Payroll with GPS Tracking and Image Capture
-</h1>
-    <!-- ABOUT -->
-    <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
-        <div class="container">
-            <div class="row">
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1 class="reveal">Bhargav Chirumamilla</h1>
+        <p class="hero-desc reveal">
+            My work focuses on scalable machine learning infrastructure and applied AI. In my research, I explore generative AI for drift handling and anomaly detection in telecommunication networks. Currently, I am working on RAG systems and deep learning recommendation models as a Data Scientist at AARP.
+        </p>
+        <div class="scroll-indicator">↓ Scroll</div>
+    </header>
+
+    <!-- About & Education Section -->
+    <section id="about">
+        <h2 class="section-header reveal">About Me.</h2>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>I am a Data Scientist and Machine Learning Engineer specializing in building scalable ML infrastructure and applied AI systems. With a strong foundation in both academic research and industry application, I focus on turning complex datasets into robust, production-ready solutions.</p>
+                <p>My technical expertise spans deep learning recommendation models, real-time RAG pipelines, and large-scale data mining architectures. Rather than limiting my scope to a single phase of development, I thrive in environments where I can take end-to-end ownership of the machine learning lifecycle—from data preprocessing and model training to deployment and observability.</p>
+                <p>Equipped with an M.S. in Computer Science from Johns Hopkins University, I am continuously exploring the intersection of distributed systems and foundation models, ensuring that cutting-edge research can be practically and reliably applied to high-stakes business challenges.</p>
+            </div>
+            
+            <div class="education-box reveal">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: -0.5px;">Education</h3>
                 
-                <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
-                    <div class="about-text">
-                        
-                        
-                        <p>The purpose of an automated payroll application is to keep track of the attendance as well as payroll (salary) of the employees in an organization. In such an organization, employees are constantly deployed on site at various client locations. Hence, the location of the employees needs to be tracked by the or- ganization in order to calculate their attendance and payroll. The advantage of having such an application is manifold as explained below:</p>
-                        <li>This System helps the admin to keep track of the employees who go for field work.</li>
-                        <li>Since GPS location of the employee is tracked, so employee will not at- tempt to add proxy attendance.</li>
-                        <li>This application helps admin and HR to easily check the salary of the employee.</li>
-                        <br>
-                    </div>
+                <div class="edu-item">
+                    <div class="edu-school">Johns Hopkins University</div>
+                    <div class="edu-degree">M.S. in Computer Science</div>
+                    <div class="edu-meta">GPA: 4.0 | Baltimore, MD</div>
                 </div>
-
-                <div class="col-lg-5 col-md-12 col-12">
-                    <div class="about-image svg"><br><br><br>
-                        <img src="images/Automated-Payroll-Systems.jpeg" class="img-fluid" alt="svg image">
-                    </div>
+                
+                <div class="edu-item">
+                    <div class="edu-school">IIT Dharwad</div>
+                    <div class="edu-degree">B.Tech in Engineering</div>
+                    <div class="edu-meta">Dharwad, India</div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-     <footer class="footer py-5">
-          <div class="container">
-               <div class="row">
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-header reveal">Core Stack.</h2>
+        <div class="skills-grid reveal">
+            <div class="skill-card">
+                <h3>Machine Learning & AI</h3>
+                <div class="skill-tags">
+                    <span>PyTorch</span>
+                    <span>Transformers</span>
+                    <span>Deep Learning</span>
+                    <span>NLP & RAG</span>
+                    <span>Reinforcement Learning</span>
+                    <span>Agentic Systems</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Data Science & Engineering</h3>
+                <div class="skill-tags">
+                    <span>Python</span>
+                    <span>SQL</span>
+                    <span>Data Mining</span>
+                    <span>Feature Engineering</span>
+                    <span>Distributed Systems</span>
+                    <span>API Design</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>MLOps & Infrastructure</h3>
+                <div class="skill-tags">
+                    <span>Docker</span>
+                    <span>Kubernetes</span>
+                    <span>AWS / GCP</span>
+                    <span>Databricks</span>
+                    <span>MLflow</span>
+                    <span>CI/CD</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="col-lg-12 col-12">                                
-                        <p class="copyright-text text-center">Designed by Bhargav</p>
-                    </div>
-                    
-               </div>
-          </div>
-     </footer>
+    <!-- Work Experience Section -->
+    <section id="work">
+        <h2 class="section-header reveal">Experience.</h2>
+        
+        <div class="exp-item reveal">
+            <div class="exp-meta">
+                <h3>Data Scientist</h3>
+                <div class="company">AARP Services Inc.</div>
+                <div class="date">Sep 2025 &mdash; Present</div>
+            </div>
+            <div class="exp-details">
+                <p>Built and trained ML pipelines for a RAG-based NL-to-SQL assistant querying 76M+ records, optimizing large-scale data retrieval.</p>
+                <p>Deployed deep learning recommendation models (Two-Tower, DLRM, LightGBM) to production, tracking data drift and diagnosing model regressions.</p>
+            </div>
+        </div>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/Headroom.js"></script>
-    <script src="js/jQuery.headroom.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/smoothscroll.js"></script>
-    <script src="js/custom.js"></script>
+        <div class="exp-item reveal">
+            <div class="exp-meta">
+                <h3>AI/ML Engineer</h3>
+                <div class="company">Sokat LLC.</div>
+                <div class="date">Feb 2025 &mdash; Jul 2025</div>
+            </div>
+            <div class="exp-details">
+                <p>Engineered agentic systems and autonomous reasoning workflows using LangGraph and Anthropic Claude to resolve 15,000+ complex operational exceptions.</p>
+                <p>Translated model prototypes into maintainable engineering solutions by building ReAct and tool-calling integrations (n8n, Zapier).</p>
+            </div>
+        </div>
 
-  </body>
+        <div class="exp-item reveal">
+            <div class="exp-meta">
+                <h3>Machine Learning Engineer</h3>
+                <div class="company">Samsung India</div>
+                <div class="date">Jan 2023 &mdash; Dec 2024</div>
+            </div>
+            <div class="exp-details">
+                <p>Supported the deployment of a LoRA fine-tuned LLM for NL-to-SQL generation, applying optimization techniques like batch inference and quantization.</p>
+                <p>Designed a RAG-powered Code Assistant leveraging Model Context Protocol (MCP) to index 15,000+ files and reduce development time by 40%.</p>
+            </div>
+        </div>
+
+        <div class="exp-item reveal">
+            <div class="exp-meta">
+                <h3>Research Assistant</h3>
+                <div class="company">IIT Dharwad</div>
+                <div class="date">Mar 2022 &mdash; Dec 2022</div>
+            </div>
+            <div class="exp-details">
+                <p>Developed and trained predictive models using PyTorch on 500GB+ of historical data, optimizing ML pipelines for long-tail scenario forecasting.</p>
+                <p>Co-authored 3 peer-reviewed publications validating scalable AI evaluation frameworks and active learning workflows.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-header reveal">Selected Work.</h2>
+        
+        <div class="project-grid reveal">
+            
+            <div class="project-card">
+                <div class="project-title">
+                    <a href="https://github.com/Chirumamilla1522" target="_blank">Agentic Trading Terminal ↗</a>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span><span>LangGraph</span><span>Agentic Systems</span>
+                </div>
+                <div class="project-desc">Built real-time decision-making systems orchestrating autonomous sub-agents to process 10,000+ daily operational data streams, utilizing autonomous reasoning to extract critical intelligence.</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">
+                    <a href="https://github.com/Chirumamilla1522" target="_blank">NextSnap AI ↗</a>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span><span>SQL</span><span>Data Mining</span>
+                </div>
+                <div class="project-desc">Created ML-based data mining pipelines to analyze 1.5M+ spatio-temporal tracking points, identifying long-tail scenarios and critical edge cases to optimize predictive architectures.</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">
+                    <a href="https://github.com/Chirumamilla1522/rfe-drift-gridworld" target="_blank">Reward-Free Exploration ↗</a>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span><span>PyTorch</span><span>RL</span>
+                </div>
+                <div class="project-desc">Engineered active learning loops to systematically explore complex state spaces, using the model to find the data that breaks the model across 10,000+ simulated edge-cases.</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">
+                    <a href="https://github.com/Chirumamilla1522/AQJl-Memory-Efficient-Long-Context-LLM-Inference-via-QJL-and-Adaptive-Layer-Wise-Compression" target="_blank">A-QJL: LLM Inference ↗</a>
+                </div>
+                <div class="project-tech">
+                    <span>PyTorch</span><span>Quantization</span>
+                </div>
+                <div class="project-desc">Designed custom quantization and layer-wise compression techniques to ensure foundation models ran efficiently in constrained environments, achieving a 75% memory footprint reduction.</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">
+                    <a href="https://github.com/Chirumamilla1522" target="_blank">EasySpeak AI ↗</a>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span><span>Audio Processing</span>
+                </div>
+                <div class="project-desc">Built ML pipelines to process multimodal audio, applying scalable data preprocessing techniques to extract insights and map complex user intents into structured workflows.</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">
+                    <a href="https://github.com/Chirumamilla1522/LLM-Inference" target="_blank">MLX Benchmark Suite ↗</a>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span><span>Observability</span>
+                </div>
+                <div class="project-desc">Built comprehensive dashboards to monitor production performance, tracking system health and data drift across 100,000+ operational logs.</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Research Publications Section -->
+    <section id="research">
+        <h2 class="section-header reveal">Research.</h2>
+        
+        <div class="list-container reveal">
+            
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">GEN-DRIFT: Generative AI-driven drift handling for beyond 5G networks ↗</a></div>
+                <div class="list-meta-1">V Gudepu, <strong>B Chirumamilla</strong>, VR Chintapalli, P Castoldi, L Valcarenghi, ...</div>
+                <div class="list-meta-2">Computer Networks 263, 111237 &mdash; 2025</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">EARNEST: Experimental analysis of RAN energy with open-source software tools ↗</a></div>
+                <div class="list-meta-1">V Gudepu, <strong>B Chirumamilla</strong>, RR Tella, A Bhattacharyya, S Agarwal, ...</div>
+                <div class="list-meta-2">16th Int. Conf. on COMmunication Systems & NETworkS &mdash; 2024</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">Integrating Explainable AI for Energy Efficient Open Radio Access Networks ↗</a></div>
+                <div class="list-meta-1">L Malakalapalli, V Gudepu, <strong>B Chirumamilla</strong>, SJ Yadhunandan, ...</div>
+                <div class="list-meta-2">IEEE Future Networks World Forum (FNWF) &mdash; 2024</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">Generative-AI for AI/ML model adaptive retraining in Beyond 5G networks ↗</a></div>
+                <div class="list-meta-1">V Gudepu, <strong>B Chirumamilla</strong>, VR Chintapalli, P Castoldi, L Valcarenghi, ...</div>
+                <div class="list-meta-2">arXiv preprint arXiv:2408.14827 &mdash; 2024</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">GAN-Based Drift and Anomaly Detection for Open Radio Access Networks ↗</a></div>
+                <div class="list-meta-1">V Gudepu, <strong>B Chirumamilla</strong>, VR Chintapalli, P Castoldi, L Valcarenghi, ...</div>
+                <div class="list-meta-2">IEEE 25th Int. Conf. on High Performance Switching and Routing &mdash; 2024</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">Assessing Datasets for O-RAN RICs: Hoarding vs Choosing ↗</a></div>
+                <div class="list-meta-1">E Harshitha, V Gudepu, <strong>B Chirumamilla</strong>, C Centifonti, A Marotta, ...</div>
+                <div class="list-meta-2">IEEE Int. Conf. on Advanced Networks and Telecommunications &mdash; 2024</div>
+            </div>
+            
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">GAN-Based AI/ML Model Adaptive Retraining for Beyond 5G Networks ↗</a></div>
+                <div class="list-meta-1">V Gudepu, <strong>B Chirumamilla</strong>, VR Chintapalli, P Castoldi, L Valcarenghi, ...</div>
+                <div class="list-meta-2">European Wireless 2023; 28th European Wireless Conference &mdash; 2023</div>
+            </div>
+            
+            <div class="list-item">
+                <div class="list-title"><a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">AI/ML Model Training in O-RAN: Assessing Datasets for Hoarding and Choosing Strategies ↗</a></div>
+                <div class="list-meta-1">V Gudepu, <strong>B Chirumamilla</strong>, VR Chintapalli, P Castoldi, L Valcarenghi, ...</div>
+                <div class="list-meta-2">IEEE Int. Conf. on Advanced Networks and Telecommunications &mdash; 2023</div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- Blog Section -->
+    <section id="blog">
+        <h2 class="section-header reveal">Writing.</h2>
+        
+        <div class="list-container reveal">
+            
+            <div class="list-item">
+                <div class="list-title"><a href="#">Scaling Multi-Agent Workflows with LangGraph ↗</a></div>
+                <div class="list-meta-1">A deep dive into state management and failure handling for autonomous AI systems in production.</div>
+                <div class="list-meta-2">Coming Soon &mdash; 8 min read</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="#">Understanding KV-Cache Management for LLM Inference ↗</a></div>
+                <div class="list-meta-1">Exploring optimization techniques, batch inference, and quantization to reduce memory footprints.</div>
+                <div class="list-meta-2">Coming Soon &mdash; 12 min read</div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-title"><a href="#">From Prototype to Production: Deploying AI Agents ↗</a></div>
+                <div class="list-meta-1">Why your sandbox benchmarks don't matter, and how to build deterministic systems that survive real-world constraints.</div>
+                <div class="list-meta-2">Coming Soon &mdash; 10 min read</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">&copy; 2026 Bhargav Chirumamilla.</div>
+        <div class="footer-links">
+            <a href="mailto:bhargavchirumamilla140@gmail.com">Email</a>
+            <a href="https://github.com/Chirumamilla1522" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/Bhargav-Chirumamilla" target="_blank">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=PVkrrVcAAAAJ&hl=en" target="_blank">Scholar</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on initial load
+
+        // Nav background scroll logic
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.borderBottomColor = 'var(--border)';
+            } else {
+                nav.style.borderBottomColor = 'transparent';
+            }
+        });
+
+        // Dark Mode Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved user preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Save preference to local storage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
 </html>
